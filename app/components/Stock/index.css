@@ -1,0 +1,14 @@
+.item {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px #eee solid;
+}
+
+.itemName {
+  flex-basis: 200px;
+}
+
+.itemValue {
+  text-align: right;
+  flex-basis: 100px;
+}

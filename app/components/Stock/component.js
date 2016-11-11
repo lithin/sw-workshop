@@ -3,11 +3,11 @@ import React from 'react';
 import styles from './index.css';
 
 const Item = ({ name, value }) => (
-  <div>
-    <div>
+  <div className={styles.item}>
+    <div className={styles.itemName}>
       {name}
     </div>
-    <div>
+    <div className={styles.itemValue}>
       {value}
     </div>
   </div>

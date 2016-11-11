@@ -4,20 +4,24 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: [
-    'webpack-dev-server/client',
-    'webpack/hot/only-dev-server',
-    './app/index',
-  ],
-  output: { // Compile into js/build.js
+  entry: {
+    app: [
+      'webpack-dev-server/client',
+      './app/index',
+    ],
+    sw: [
+      './app/sw',
+    ],
+  },
+  output: {
     path: path.resolve(__dirname, 'public'),
     publicPath: '/',
-    filename: 'index.js',
+    filename: '[name].js',
   },
   module: {
     loaders: [{
-      test: /\.js$/, // Transform all .js files required somewhere with Babel
-      loaders: ['react-hot-loader/webpack', 'babel'],
+      test: /\.js$/,
+      loaders: ['babel'],
       exclude: /node_modules/,
     }, {
       test: /\.css$/,
@@ -28,7 +32,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './app/index.html',
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('[name].css')
   ],
   resolve: {
@@ -42,11 +45,10 @@ module.exports = {
     return [
     ];
   },
-  devtool: 'eval', // debugging - can be source-map etc
-  target: 'web', // Make web variables accessible to webpack, e.g. window
+  devtool: 'eval',
+  target: 'web',
   devServer: {
     contentBase: './public',
-    hot: true,
     noInfo: true,
     historyApiFallback: {
       index: 'index.html'
