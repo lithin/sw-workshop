@@ -11,16 +11,20 @@ export default class Getter extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.interval = setInterval(() => {
-      fetch('data/get')
-        .then(response => response.json())
-        .then(result => {
-          this.setState({
-            data: result,
-          });
+  getUpdate = () =>
+    fetch('https://xrlk07ktf3.execute-api.eu-west-1.amazonaws.com/dev/get')
+      .then(response => response.json())
+      .then(result => {
+        this.setState({
+          data: result,
         });
-    }, 2000);
+      });
+
+  componentDidMount() {
+    this.getUpdate();
+    this.interval = setInterval(() => {
+      this.getUpdate();
+    }, 5000);
   }
 
   componentWillUnmount() {

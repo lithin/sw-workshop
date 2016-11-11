@@ -17,7 +17,7 @@ const Display = ({ data }) => {
   return (
     <div className={styles.stats}>
       <h1>Stock</h1>
-      { data.map(({ name, value }) => <Item name={name} value={value} />) }
+      { data.map(({ name, value }) => <Item name={name} value={value} key={name} />) }
     </div>
   );
 };

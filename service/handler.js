@@ -1,20 +1,24 @@
-const getValue = () => Math.random();
+function getValue() {
+  return Math.floor((Math.random() * 100));
+}
 
-export function get(event, _, callback) {
-  return callback(null, [{
-    name: shirt,
-    value: getValue(),
-  }, {
-    name: sneakers,
-    value: getValue(),
-  }, {
-    name: scarf,
-    value: getValue(),
-  }, {
-    name: tights,
-    value: getValue(),
-  }, {
-    name: hat,
-    value: getValue(),
-  }]);
+module.exports = {
+  get: function get(_, __, callback) {
+    return callback(null, [{
+      name: 'Denim shirt S',
+      value: getValue(),
+    }, {
+      name: 'Black sneakers (size 5)',
+      value: getValue(),
+    }, {
+      name: 'Purple scarf with pattern',
+      value: getValue(),
+    }, {
+      name: 'Grey tights',
+      value: getValue(),
+    }, {
+      name: 'Red hat',
+      value: getValue(),
+    }]);
+  }
 }
