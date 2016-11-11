@@ -14,9 +14,10 @@ const Item = ({ name, value }) => (
   </div>
 )
 
-const Display = ({ data }) => {
+const Display = ({ data, offline }) => {
   return (
     <div className={styles.stats}>
+      {offline && <h2>Offline ;)</h2>}
       <h1>Stock</h1>
       <img src={image} alt="Fashion" />
       { data.map(({ name, value }) => <Item name={name} value={value} key={name} />) }
