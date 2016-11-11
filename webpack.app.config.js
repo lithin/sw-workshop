@@ -4,19 +4,11 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: {
-    app: [
-      'webpack-dev-server/client',
-      './app/index',
-    ],
-    sw: [
-      './app/sw',
-    ],
-  },
+  entry: './app/index',
   output: {
     path: path.resolve(__dirname, 'public'),
     publicPath: '/',
-    filename: '[name].js',
+    filename: 'bundle.js',
   },
   module: {
     loaders: [{
@@ -25,14 +17,19 @@ module.exports = {
       exclude: /node_modules/,
     }, {
       test: /\.css$/,
-      loader: 'style!css?modules&importLoaders=1&localIdentName=[local]__[path][name]__[hash:base64:5]!postcss-loader',
+      loader: ExtractTextPlugin.extract('style-loader', 'css?modules&importLoaders=1&localIdentName=[local]__[path][name]__[hash:base64:5]!postcss-loader'),
+    }, {
+      test: /\.jpeg$/,
+      loader: 'file-loader',
     }]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './app/index.html',
     }),
-    new ExtractTextPlugin('[name].css')
+    new ExtractTextPlugin('style.css', {
+      allChunks: true,
+    })
   ],
   resolve: {
     modules: [
@@ -46,13 +43,6 @@ module.exports = {
     ];
   },
   devtool: 'eval',
-  target: 'web',
-  devServer: {
-    contentBase: './public',
-    noInfo: true,
-    historyApiFallback: {
-      index: 'index.html'
-    }
-  },
+  target: 'web'
 
 };

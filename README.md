@@ -11,15 +11,18 @@ To run this locally, you will first need to install the dependencies.
 ```
 npm install
 
-// if you haven't used webpack-dev-server
+# if you haven't used http-server before
 
-npm i -g webpack-dev-server
+npm i -g http-server
 ```
 
 Then run:
 
 ```
-npm start
+npm run build         # this will build and watch the app
+npm starts            # this will build and watch the sercice worker
+http-server public    # this will serve both
+
 ```
 
 ...and you're good to go!

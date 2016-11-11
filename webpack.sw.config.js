@@ -1,20 +1,27 @@
+const path = require('path');
+const webpack = require('webpack');
+
 module.exports = {
-  entry: [
-    'webpack-dev-server/client',
-    './app/sw',
-  ],
+  entry: './app/sw',
   output: {
-    path: 'public',
+    path: path.resolve(__dirname, 'public'),
+    publicPath: '/',
     filename: 'sw.js',
   },
-  target: 'web',
   module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loaders: ['babel'],
-      },
-    ],
+    loaders: [{
+      test: /\.js$/,
+      loaders: ['babel'],
+      exclude: /node_modules/,
+    }]
   },
+  resolve: {
+    modules: [
+      'node_modules',
+      'app',
+    ],
+    extensions: ['', '.js'],
+  },
+  devtool: 'eval',
+  target: 'web',
 };

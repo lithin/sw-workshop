@@ -1,6 +1,7 @@
 import React from 'react';
 
 import styles from './index.css';
+import image from './fashion.jpeg';
 
 const Item = ({ name, value }) => (
   <div className={styles.item}>
@@ -17,6 +18,7 @@ const Display = ({ data }) => {
   return (
     <div className={styles.stats}>
       <h1>Stock</h1>
+      <img src={image} alt="Fashion" />
       { data.map(({ name, value }) => <Item name={name} value={value} key={name} />) }
     </div>
   );
