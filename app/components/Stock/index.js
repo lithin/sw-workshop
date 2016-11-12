@@ -16,7 +16,7 @@ export default class Getter extends React.Component {
   getUpdate = () =>
     fetch('https://xrlk07ktf3.execute-api.eu-west-1.amazonaws.com/dev/get')
       .then(response => {
-        if (response.statusText === 'CACHED') {
+        if (response.statusText === 'Cached') {
           this.setState({
             offline: true
           });

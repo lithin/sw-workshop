@@ -1,9 +1,9 @@
-
+const CACHE_VERSION = '3'
 
 self.addEventListener('install', function(event) {
   console.log('Hello DevFest Berlin 2016!');
   event.waitUntil(function() {
-    return caches.open('3')
+    return caches.open(CACHE_VERSION)
       .then(cache => {
         return cache.addAll([
           '/',
@@ -19,15 +19,9 @@ self.addEventListener('fetch', function(event) {
     .then(response => {
 
       if (event.request.url.endsWith('/get')) {
-        caches.open('3')
-          .then(cache => {            
-            const init = { 
-              "status" : 200 , 
-              "statusText" : "CACHED"
-            };
-            response.blob().then(blob => {
-              cache.put(event.request, new Response(blob, init));
-            });
+        caches.open(CACHE_VERSION)
+          .then(cache => {
+            cache.put(event.request, response);
           });
 
         return response.clone();
@@ -36,7 +30,27 @@ self.addEventListener('fetch', function(event) {
     })
     .catch(err => {
       return caches.match(event.request)
-      .then(response => response);
+        .then(response => {
+          // check if response is cached with cached statusText 
+          if (response.statusText == 'OK') {
+            const init = { 
+              "status" : 200,
+              "statusText" : "Cached"
+            };
+            return response.blob()
+              .then(blob => {
+                var newResponse = new Response(blob, init);
+                caches.open(CACHE_VERSION)
+                  .then(cache => {
+                    cache.put(event.request, newResponse);
+                  });
+                console.log(newResponse.clone())
+                return newResponse.clone();
+              });
+          }
+          // already modfied
+          return response;
+        });
     }));
   }
 );
