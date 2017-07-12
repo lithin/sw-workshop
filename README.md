@@ -20,7 +20,7 @@ Then run:
 
 ```
 npm run build         # this will build and watch the app
-npm starts            # this will build and watch the sercice worker
+npm start            # this will build and watch the service worker
 http-server public    # this will serve both
 
 ```
