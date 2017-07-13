@@ -1,6 +1,6 @@
 # Service Workers Workshop
 
-Hello Berlin DevFest 2016!
+Hello FullStack 2017!
 
 This is a platform that will allow us to get started with service workers and learn how to use them quickly.
 
