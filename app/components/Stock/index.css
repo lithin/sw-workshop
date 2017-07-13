@@ -4,6 +4,10 @@
   border-bottom: 1px #eee solid;
 }
 
+.offline {
+  color: #999;
+}
+
 .itemName {
   flex-basis: 200px;
 }

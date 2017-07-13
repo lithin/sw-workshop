@@ -14,9 +14,9 @@ const Item = ({ name, value }) => (
   </div>
 )
 
-const Display = ({ data }) => {
+const Display = ({ data, offline }) => {
   return (
-    <div className={styles.stats}>
+    <div className={offline ? styles.offline : ''}>
       <h1>Stock</h1>
       <img src={image} alt="Fashion" />
       { data.map(({ name, value }) => <Item name={name} value={value} key={name} />) }
