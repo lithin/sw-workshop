@@ -7,13 +7,19 @@ export default class Getter extends React.Component {
   constructor() {
     super();
     this.state = {
-      data: []
+      data: [],
+      offline: false
     };
   }
 
   getUpdate = () =>
     fetch('https://xrlk07ktf3.execute-api.eu-west-1.amazonaws.com/dev/get')
-      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          offline: response.statusText === 'cached'
+        });
+        return response.json();
+      })
       .then(result => {
         this.setState({
           data: result,
@@ -33,7 +39,7 @@ export default class Getter extends React.Component {
 
   render() {
     return (
-      <Component data={this.state.data} />
+      <Component data={this.state.data} offline={this.state.offline}/>
     );
   }
 }
